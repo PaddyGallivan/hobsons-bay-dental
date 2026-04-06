@@ -21,7 +21,10 @@
   <script>
     fetch("https://oaucfjiairycnzyqvuty.supabase.co/functions/v1/get-html")
       .then(function(r) { return r.json(); })
-      .then(function(d) { document.open(); document.write(d.html); document.close(); })
+      .then(function(d) {
+        var blob = new Blob([d.html], { type: "text/html" });
+        window.location.href = URL.createObjectURL(blob);
+      })
       .catch(function(e) { document.getElementById("app").innerHTML = "<h1>Error</h1><p>" + e.message + "</p>"; });
   </script>
 </body>
